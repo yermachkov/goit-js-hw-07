@@ -22,6 +22,11 @@ function createGalleryMarkup ({ preview, original, description }) {
     `;
 };
 
+const options = {
+  onShow: (openedImg) => {
+    document.removeEventListener('click', onImgClick);
+  }
+}
 
 galleryContainer.addEventListener('click', onImgClick);
 
@@ -35,7 +40,7 @@ function onImgClick(event) {
   if (event.target.nodeName === 'IMG') {
     const openedImg = basicLightbox.create(`
     <img src="${event.target.dataset.source}" width="800" height="600">
-    `);
+    `, options);
     openedImg.show();
   }
 }
